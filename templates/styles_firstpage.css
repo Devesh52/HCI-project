@@ -1,0 +1,112 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: url("data/home_background.jpg") no-repeat center top 70px / cover;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .header {
+    width: 100%;
+    background-color: #b0c4fc;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .logo {
+    font-size: 50px;
+    font-weight: bold;
+    margin-left: 200px;
+    color: white;
+  }
+  
+  .logout {
+    background-color: white;
+    border: none;
+    border-radius: 30px;
+    padding: 10px 30px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-right: 100px;
+    transition: background 0.3s ease;
+  }
+  
+  .logout:hover {
+    background-color: #e6e6e6;
+  }
+  
+  .container {
+    display: flex;
+    align-items: center;
+    height: calc(100vh - 110px);
+    width: 100%;
+    position: relative;
+  }
+  
+  .overlay {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
+    z-index: 1;
+  }
+  
+  .text-wrapper {
+    position: absolute;
+    left: 100px;
+    z-index: 2;
+    max-width: 400px;
+  }
+  
+  .description {
+    font-size: 50px;
+    font-weight: bold;
+    color: white;
+    line-height: 1.2;
+  }
+  
+  .button-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    position: absolute;
+    right: 100px;
+    z-index: 2;
+  }
+  
+  .btn {
+    width: 350px;
+    text-align: center;
+    padding: 30px;
+    font-size: 30px;
+    font-weight: bold;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    background-color: #f2c6cf;
+    color: #bc828e;
+    transition: transform 0.3s ease;
+  }
+  
+  .get-started {
+    height: 200px;
+  }
+  
+  .analytics {
+    height: 80px;
+  }
+  
+  .btn:hover {
+    transform: scale(1.1);
+  }
+  
