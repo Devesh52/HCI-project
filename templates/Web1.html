@@ -24,11 +24,10 @@
             justify-content: space-between;
         }
 
-        /* Profile picture circle */
         .profile-pic {
             width: 100px;
             height: 100px;
-            background-color: white; /* Placeholder color */
+            background-color: white;
             border-radius: 50%;
             margin-right: 15px;
         }
@@ -40,7 +39,7 @@
         }
 
         .header img {
-            width: 100px; /* Increased size */
+            width: 100px;
             height: 100px;
             cursor: pointer;
         }
@@ -61,21 +60,35 @@
             align-items: center;
             justify-content: center;
             background-color: white;
-            border-radius: 20px; /* Rounded edges */
+            border-radius: 20px;
             position: relative;
         }
 
         .box img {
-            max-width: 100%;
-            max-height: 100%;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            position: absolute;
         }
 
-        /* Reduce opacity for the right letter */
         .box:nth-child(2) img {
             opacity: 0.5;
         }
 
-        /* Guide lines in the second box */
+        .box:nth-child(2) {
+            position: relative;
+            cursor: url('./data/pencil.png') 16 16, auto;
+        }
+
+        .box:nth-child(2) canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: auto;
+        }
+
         .box:nth-child(2)::before,
         .box:nth-child(2)::after,
         .box:nth-child(2) .middle-line {
@@ -88,15 +101,15 @@
         }
 
         .box:nth-child(2)::before {
-            top: 10%; /* First line at the top */
+            top: 10%;
         }
 
         .box:nth-child(2) .middle-line {
-            top: 50%; /* Middle line */
+            top: 50%;
         }
 
         .box:nth-child(2)::after {
-            top: 90%; /* Last line at the bottom */
+            top: 90%;
         }
 
         .footer {
@@ -107,14 +120,13 @@
         }
 
         .footer img {
-            width: 120px; /* Increased size */
+            width: 120px;
             height: 120px;
             cursor: pointer;
             position: absolute;
-            left: 500px; /* Align below the second letter box */
+            left: 500px;
             top: 20px;
         }
-
     </style>
 </head>
 <body>
@@ -124,23 +136,89 @@
             <div class="profile-pic"></div>
             <span>LearnHindi</span>
         </div>
-        <img src="/home/devesh/Desktop/IT351/back.jpg" alt="Back">
+        <img src="./data/back.jpg" alt="Back">
     </div>
 
     <div class="container">
         <div class="box">
-            <img src="/home/devesh/Desktop/IT351/a.png" alt="Hindi Letter">
+            <img src="./data/a.png" alt="Hindi Letter">
         </div>
         <div class="box">
-            <div class="middle-line"></div> <!-- Middle guide line -->
-            <img src="/home/devesh/Desktop/IT351/a.png" alt="Hindi Letter (Transparent)">
+            <div class="middle-line"></div>
+            <img id="tracingImage" src="./data/a.png" alt="Hindi Letter (Transparent)">
+            <canvas id="drawingCanvas"></canvas>
         </div>
     </div>
 
     <div class="footer">
-        <img src="/home/devesh/Desktop/IT351/next.jpeg" alt="Next">
+        <img src="./data/next.jpeg" alt="Next">
     </div>
 
+    <script>
+        const canvas = document.getElementById('drawingCanvas');
+        const ctx = canvas.getContext('2d');
+        const tracingImage = document.getElementById('tracingImage');
+        let drawing = false;
+
+        function resizeCanvas() {
+            canvas.width = tracingImage.clientWidth;
+            canvas.height = tracingImage.clientHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        function getCanvasOffset(event) {
+            const rect = tracingImage.getBoundingClientRect();
+            return {
+                x: event.clientX - rect.left,
+                y: event.clientY - rect.top
+            };
+        }
+
+        function isInsideImage(x, y) {
+            return x >= 0 && x <= canvas.width && y >= 0 && y <= canvas.height * 0.95;
+        }
+
+        function startDrawing(event) {
+            const pos = getCanvasOffset(event);
+            if (!isInsideImage(pos.x, pos.y)) return;
+            drawing = true;
+            ctx.beginPath();
+            ctx.moveTo(pos.x, pos.y);
+        }
+
+        function draw(event) {
+            if (!drawing) return;
+            const pos = getCanvasOffset(event);
+            if (!isInsideImage(pos.x, pos.y)) return;
+            ctx.lineTo(pos.x, pos.y);
+            ctx.strokeStyle = 'black';
+            ctx.lineWidth = 4;
+            ctx.lineCap = 'round';
+            ctx.stroke();
+        }
+
+        function stopDrawing() {
+            drawing = false;
+            ctx.closePath();
+        }
+
+        canvas.addEventListener('mousedown', startDrawing);
+        canvas.addEventListener('mousemove', draw);
+        canvas.addEventListener('mouseup', stopDrawing);
+        canvas.addEventListener('mouseleave', stopDrawing);
+
+        canvas.addEventListener('touchstart', (event) => {
+            event.preventDefault();
+            startDrawing(event.touches[0]);
+        });
+
+        canvas.addEventListener('touchmove', (event) => {
+            event.preventDefault();
+            draw(event.touches[0]);
+        });
+
+        canvas.addEventListener('touchend', stopDrawing);
+    </script>
 </body>
 </html>
-
