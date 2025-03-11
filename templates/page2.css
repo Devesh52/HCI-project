@@ -1,0 +1,99 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    background-color: #a4c2f4;
+    padding: 15px;
+    font-size: 50px;
+    font-weight: bold;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.title {
+    font-size: 28px;
+    font-weight: bold;
+    color: white;
+}
+
+.back-button {
+    background-color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+.subtitle img {
+    width: 600px;
+    margin: 30px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.row {
+    display: flex;
+    padding: 20px;
+    border-radius: 60px; /* Making ends semi-circular */
+    margin: 20px;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    cursor: pointer;
+    background-color: white; /* Default row background */
+    position: relative;
+}
+
+/* Make the row pop up on hover */
+.row:hover {
+    transform: scale(1.1); /* Slight zoom effect */
+    box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.4); /* Stronger shadow for pop effect */
+}
+
+/* Ensuring the green background is continuous for the first two letters */
+.progress {
+    background-color: #76ff76;
+}
+
+/* Using ::before to create a continuous green background for progress elements */
+.row .progress:first-child {
+    border-top-left-radius: 40px;
+    border-bottom-left-radius: 40px;
+}
+
+.row .progress:last-of-type {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+/* Ensuring spacing is even */
+.letter {
+    width: 120px;
+    height: auto;
+    margin: 0px;
+    padding: 5px;
+}
+
+.am {
+    width: 120px;
+    height: 120px;
+    margin-top: 15px;
+    padding: 5px;
+}
+
+.ah {
+    width: 120px;
+    height: 120px;
+    margin-top: 30px;
+    padding: 5px;
+}
