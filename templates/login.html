@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Login - Learn Hindi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f9f9f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+
+        h2 {
+            color: #4A90E2;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        label {
+            text-align: left;
+            width: 100%;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #4A90E2;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #357ABD;
+        }
+
+        .register-link {
+            margin-top: 20px;
+        }
+
+        .error {
+            color: red;
+            margin-bottom: 20px;
+        }
+
+        /* Back button styling */
+        #back-btn {
+            position: fixed;
+            left: 20px;
+            top: 20px;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var backButton = document.getElementById("back-btn");
+            if (backButton) {
+                backButton.addEventListener("click", function () {
+                    window.location.href = "{{ url_for('index') }}"; // Redirects to home page
+                });
+            }
+        });
+    </script>
+</head>
+
+<body>
+    <img src="{{ url_for('static', filename='data/back.png') }}" alt="Back" id="back-btn" />
+
+    <div class="container">
+        <h2>Login</h2>
+        {% if error %}
+        <p class="error">{{ error }}</p>
+        {% endif %}
+        
+        <form action="{{ url_for('login') }}" method="POST">
+            <label for="name">Username:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+
+            <button type="submit">Login</button>
+        </form>
+        
+        <div class="register-link">
+            New here? <a href="{{ url_for('register') }}">Register now</a>
+        </div>
+    </div>
+</body>
+
+</html>

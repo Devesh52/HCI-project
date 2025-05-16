@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learnability Report</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='learnability.css') }}">
+
+    <style>
+        /* Back button styling */
+        #back-btn {
+            position: fixed;
+            left: 20px;
+            top: 20px;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+        }
+    </style>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var backButton = document.getElementById("back-btn");
+            if (backButton) {
+                backButton.addEventListener("click", function () {
+                    window.history.back(); // Navigate to the previous page
+                });
+            }
+        });
+    </script>
+</head>
+<body>
+    <img src="{{ url_for('static', filename='data/back.png') }}" alt="Back" id="back-btn" />
+
+    <h1>Learnability</h1>
+
+    <div class="container">
+        <section class="stats">
+            <div class="stat-box">
+                <p>Average attempts per alphabet</p>
+                <h2>5.12</h2>
+            </div>
+            <div class="stat-box">
+                <p>Alphabet learnt slowest</p>
+                <h2 class="alphabet">ह</h2>
+                <p>10 attempts</p>
+            </div>
+            <div class="stat-box">
+                <p>Alphabet learnt fastest</p>
+                <h2 class="alphabet">उ</h2>
+                <p>1 attempt</p>
+            </div>
+            <div class="stat-box percentage">
+                <p>% of alphabets learnt</p>
+                <div class="progress-circle">
+                    <span>56%</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="attempts">
+            <h2>Number of attempts to get each alphabet correct</h2>
+            <div class="alphabet-grid">
+                {% for alphabet, attempts in alphabet_attempts %}
+                    <div class="alphabet-box">
+                        <span>{{ alphabet }}</span>
+                        <p>{{ attempts }} attempts</p>
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+    </div>
+</body>
+</html>

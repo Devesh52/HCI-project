@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn Hindi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f8f8f8;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            background-color: #a4c2f4;
+            padding: 15px;
+            font-size: 50px;
+            font-weight: bold;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .title-container {
+            display: flex;
+            align-items: center;
+            flex-grow: 1;
+        }
+
+        .header img {
+            width: 100px;
+            height: 100px;
+            cursor: pointer;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+            gap: 20px;
+        }
+
+        .box {
+            width: 600px;
+            height: 600px;
+            border: 20px solid #a4c2f4;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: white;
+            border-radius: 20px;
+            position: relative;
+        }
+
+        .box img {
+            max-width: 90%;
+            max-height: 90%;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        .box:nth-child(2) img {
+            opacity: 0.5;
+        }
+
+        .box:nth-child(2)::before,
+        .box:nth-child(2)::after,
+        .box:nth-child(2) .middle-line {
+            content: "";
+            position: absolute;
+            width: 95%;
+            height: 4px;
+            background-color: pink;
+            left: 5%;
+        }
+
+        .box:nth-child(2)::before {
+            top: 30%;
+        }
+
+        .box:nth-child(2) .middle-line {
+            top: 50%;
+        }
+
+        .box:nth-child(2)::after {
+            top: 70%;
+        }
+
+        #drawingCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .footer {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .footer img {
+            width: 120px;
+            height: 120px;
+            cursor: pointer;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 24px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        #submit-btn {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        #retry-btn {
+            color: white;
+            display: none;
+        }
+
+        #next-btn {
+            width: 125px;
+            height: 160px;
+        }
+    </style>
+</head>
+
+<body data-back-url="{{ url_for('page2') }}" data-data-url="{{ url_for('static', filename='data/') }}">
+    <div class="header">
+        <div class="title-container">
+            <span>Learn Hindi</span>
+        </div>
+        <img src="{{ url_for('static', filename='data/back.png') }}" alt="Back" id="back-btn" />
+    </div>
+
+    <div class="container">
+        <div class="box" id="left-box">
+            <img id="letter-img" src="{{ url_for('static', filename='data/a1.png') }}" alt="Hindi Letter" />
+        </div>
+        <div class="box">
+            <div class="middle-line"></div>
+            <img id="letter-img-transparent" src="{{ url_for('static', filename='data/a1.png') }}" alt="Hindi Letter (Transparent)" />
+            <canvas id="drawingCanvas"></canvas>
+        </div>
+    </div>
+
+    <div class="footer">
+        <button id="submit-btn">Submit</button>
+        <img id="retry-btn" src="{{ url_for('static', filename='data/retry.png') }}" alt="Retry" />
+        <img id="next-btn" src="{{ url_for('static', filename='data/next.png') }}" alt="Next" style="display:none;" />
+    </div>
+
+    <script src="{{ url_for('static', filename='script3.js') }}"></script>
+</body>
+
+</html>

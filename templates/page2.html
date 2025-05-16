@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn Hindi</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='page2.css') }}">
+</head>
+<body>
+    <div class="header">
+        <div class="title-container">
+            <div class="profile-pic"></div>
+            <span>LearnHindi</span>
+        </div>
+        <img src="{{ url_for('static', filename='data/back.png') }}" class="back-button" alt="Back" onclick="location.href='{{ url_for('index') }}';">
+    </div>
+
+    <div class="subtitle">
+        <img src="{{ url_for('static', filename='data/continue_practicing.jpg') }}" alt="Continue Practicing">
+    </div>
+
+    <div class="container">
+        {% set letters = [
+            ['अ', 'आ', 'इ', 'ई', 'उ', 'ऊ'],
+            ['ए', 'ऐ', 'ओ', 'औ', 'अं', 'अः'],
+            ['क', 'ख', 'ग', 'घ', 'ङ'],
+            ['च', 'छ', 'ज', 'झ', 'ञ'],
+            ['ट', 'ठ', 'ड', 'ढ', 'ण'],
+            ['त', 'थ', 'द', 'ध', 'न'],
+            ['प', 'फ', 'ब', 'भ', 'म'],
+            ['य', 'र', 'ल', 'व'],
+            ['श', 'ष', 'स', 'ह']
+        ] %}
+
+        {% for row in letters %}
+        <div class="row">
+            {% for letter in row %}
+            <img src="{{ url_for('static', filename='data/Devanagari_' + letter + '.svg.png') }}" class="letter" alt="{{ letter }}">
+            {% endfor %}
+        </div>
+        {% endfor %}
+
+    </div>
+
+    <script src="{{ url_for('static', filename='script2.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Learn Hindi</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles_firstpage.css') }}">
+</head>
+
+<body>
+    <div class="header">
+        <div class="logo">LearnHindi</div>
+        <button class="logout" onclick="location.href='{{ url_for('login') }}'">Login</button>
+    </div>
+
+    <div class="container">
+        <div class="overlay"></div>
+
+        <div class="text-wrapper">
+            <p class="description">
+                Learn Hindi<br>
+                alphabet<br>
+                with fun<br>
+                lessons for<br>
+                kids
+            </p>
+        </div>
+
+        <div class="button-wrapper">
+            <button class="btn game1" onclick="location.href='{{ url_for('game1') }}'">Memory Game</button>
+
+            <button class="btn get-started" onclick="location.href='{{ url_for('page2') }}'">
+                <img src="{{ url_for('static', filename='data/pencil.png') }}" alt="Start" class="pencil">
+            </button>
+
+            <button class="btn analytics" onclick="location.href='{{ url_for('learnability') }}'">Analytics</button>
+        </div>
+    </div>
+</body>
+
+</html>
